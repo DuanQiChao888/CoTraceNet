@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960" role="img" aria-labelledby="title description">
+  <title id="title">CoTraceNet architecture for single-image steganalysis</title>
+  <desc id="description">A 256 by 256 grayscale image produces reference scores and five-region co-occurrence descriptors. Fisher experts use all 34,398 features or an ensemble of subspaces. Their mean provides the static anchor. A learned three-action gate makes a bounded correction. Source-paired ranking and action rewards are used during training.</desc>
+  <defs>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#6b838a"/>
+    </marker>
+    <style>
+      text {font-family:Arial,Helvetica,sans-serif;fill:#193846}
+      .h1 {font-size:37px;font-weight:700;letter-spacing:-1.1px}
+      .subtitle {font-size:20px;fill:#486471}
+      .head {font-size:23px;font-weight:700;letter-spacing:-.45px}
+      .row {font-size:18px;font-weight:700}
+      .body {font-size:17px}
+      .small {font-size:15px;fill:#455e69}
+      .tag {font-size:12px;font-weight:700;letter-spacing:1.7px}
+      .wire {fill:none;stroke:#6b838a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .arrow {fill:none;stroke:#6b838a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#tip)}
+      .rule {stroke:#d4dfe2;stroke-width:1}
+      .blue {fill:#396482}
+      .green {fill:#21685e}
+      .plum {fill:#665480}
+      .light {fill:#fff}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="960" rx="12" fill="#fbfcfb"/>
+  <path d="M40 78 H1160" class="rule"/>
+  <text x="40" y="56" class="h1">CoTraceNet</text>
+  <text x="260" y="54" class="subtitle">Residual co-occurrence steganalysis</text>
+  <text x="1160" y="52" class="tag green" text-anchor="end">FROZEN MODEL · SEED 73</text>
+  <!-- A single image supplies both descriptor paths at deployment. -->
+  <rect x="424" y="97" width="352" height="47" rx="9" fill="#193846"/>
+  <text x="600" y="127" text-anchor="middle" class="row light">One 256 × 256 grayscale image</text>
+  <path d="M600 144 V156 M277 156 H855" class="wire"/>
+  <path d="M277 156 V177" class="arrow"/>
+  <path d="M855 156 V177" class="arrow"/>
+
+  <!-- The R and C scores share the original third-order descriptor. -->
+  <rect x="40" y="181" width="474" height="346" rx="13" fill="#fff" stroke="#c9d8e2"/>
+  <path d="M54 181 H500 Q514 181 514 195 V232 H40 V195 Q40 181 54 181 Z" fill="#eaf1f6"/>
+  <text x="61" y="214" class="head blue">Reference scores</text>
+  <g>
+    <rect x="61" y="247" width="43" height="42" rx="7" fill="#e6eff5"/>
+    <text x="82.5" y="275" text-anchor="middle" class="head blue">A</text>
+    <text x="119" y="262" class="row">Frozen ShuffleBANet</text>
+    <text x="119" y="283" class="small">Standardized CNN score.</text>
+    <path d="M61 304 H491" class="rule"/>
+
+    <rect x="61" y="318" width="43" height="42" rx="7" fill="#e6eff5"/>
+    <text x="82.5" y="346" text-anchor="middle" class="head blue">R</text>
+    <text x="119" y="333" class="row">Third-order Fisher expert</text>
+    <text x="119" y="354" class="small">936 residual co-occurrence frequencies.</text>
+    <path d="M61 375 H491" class="rule"/>
+
+    <rect x="61" y="389" width="43" height="42" rx="7" fill="#e6eff5"/>
+    <text x="82.5" y="417" text-anchor="middle" class="head blue">C</text>
+    <text x="119" y="404" class="row">Texture-stratified Fisher expert</text>
+    <text x="119" y="425" class="small">936 third-order + 8,112 fourth-order features.</text>
+    <path d="M61 446 H491" class="rule"/>
+
+    <rect x="61" y="460" width="43" height="42" rx="7" fill="#e6eff5"/>
+    <text x="82.5" y="488" text-anchor="middle" class="head blue">F</text>
+    <text x="119" y="475" class="row">Fixed reference fusion</text>
+    <text x="119" y="496" class="small">0.25 R + 0.75 C</text>
+  </g>
+
+  <!-- Five strata are defined independently on every input image. -->
+  <rect x="547" y="181" width="613" height="346" rx="13" fill="#fff" stroke="#c5dcd4"/>
+  <path d="M561 181 H1146 Q1160 181 1160 195 V232 H547 V195 Q547 181 561 181 Z" fill="#e4f1eb"/>
+  <text x="568" y="214" class="head green">Five-region residual co-occurrences</text>
+  <text x="568" y="256" class="small">Estimate embedding activity from local HILL costs. Split by activity rank.</text>
+  <g text-anchor="middle">
+    <text x="681" y="282" class="small">High activity</text>
+    <text x="906" y="282" class="small">Middle activity</text>
+    <text x="1085" y="282" class="small">Low activity</text>
+    <rect x="568" y="292" width="109" height="31" rx="5" fill="#c5e2d1"/>
+    <rect x="681" y="292" width="109" height="31" rx="5" fill="#98cbb9"/>
+    <rect x="795" y="292" width="109" height="31" rx="5" fill="#d6e9e1"/>
+    <rect x="908" y="292" width="109" height="31" rx="5" fill="#bdddd3"/>
+    <rect x="1023" y="292" width="116" height="31" rx="5" fill="#e9eeeb"/>
+    <text x="622" y="313" class="small">Quieter</text>
+    <text x="735" y="313" class="small">Noisier</text>
+    <text x="849" y="313" class="small">Quieter</text>
+    <text x="962" y="313" class="small">Noisier</text>
+    <text x="1081" y="313" class="small">Pooled</text>
+  </g>
+  <text x="568" y="347" class="small">Within the first two bands, split at median 5 × 5 residual activity.</text>
+  <rect x="568" y="363" width="571" height="54" rx="7" fill="#f2f7f4"/>
+  <text x="853" y="385" text-anchor="middle" class="row green">25,350 fourth-order counts + 9,048 reference features</text>
+  <text x="853" y="405" text-anchor="middle" class="small">Elementwise square root → 34,398-dimensional descriptor</text>
+  <path d="M853 417 V425 M709 425 H1000" class="wire"/>
+  <path d="M709 425 V435" class="arrow"/>
+  <path d="M1000 425 V435" class="arrow"/>
+  <rect x="568" y="439" width="279" height="71" rx="7" fill="#e4f1eb"/>
+  <rect x="858" y="439" width="281" height="71" rx="7" fill="#e4f1eb"/>
+  <text x="707" y="466" text-anchor="middle" class="row green">E · Full Fisher expert</text>
+  <text x="707" y="490" text-anchor="middle" class="small">All 34,398 dimensions</text>
+  <text x="998" y="466" text-anchor="middle" class="row green">B · Subspace ensemble</text>
+  <text x="998" y="490" text-anchor="middle" class="small">32 heads × 512 dimensions</text>
+  <!-- E and B enter both the anchor and the gate's state; R enters via F. -->
+  <path d="M277 527 V551" class="arrow"/>
+  <path d="M855 527 V551" class="arrow"/>
+  <rect x="40" y="555" width="474" height="95" rx="10" fill="#f1edf6" stroke="#d8ccdf"/>
+  <text x="61" y="583" class="row plum">18-dimensional gate state</text>
+  <text x="61" y="609" class="small">C, F, E, B, Q, score differences, texture statistics</text>
+  <text x="61" y="632" class="small">and the bounded CNN term tanh(A) × sign(C).</text>
+  <rect x="547" y="555" width="613" height="95" rx="10" fill="#edf6f1" stroke="#c5dcd4"/>
+  <text x="568" y="585" class="row green">Static anchor</text>
+  <text x="568" y="625" style="font-size:31px;font-weight:700;fill:#21685e">Q = 0.5 E + 0.5 B</text>
+  <text x="1138" y="623" text-anchor="end" class="small">Validation-selected weights</text>
+  <path d="M547 604 H519" class="arrow"/>
+  <path d="M277 650 V671" class="arrow"/>
+  <path d="M855 650 V671" class="arrow"/>
+
+  <rect x="40" y="675" width="474" height="122" rx="10" fill="#f1edf6" stroke="#d8ccdf"/>
+  <text x="61" y="703" class="row plum">Linear softmax policy</text>
+  <g text-anchor="middle">
+    <rect x="61" y="717" width="125" height="32" rx="5" fill="#fff" stroke="#d8ccdf"/>
+    <rect x="193" y="717" width="144" height="32" rx="5" fill="#fff" stroke="#d8ccdf"/>
+    <rect x="344" y="717" width="149" height="32" rx="5" fill="#fff" stroke="#d8ccdf"/>
+    <text x="123" y="739" class="body plum">Keep · 0</text>
+    <text x="265" y="739" class="body plum">Raise · +0.55</text>
+    <text x="418" y="739" class="body plum">Lower · −0.55</text>
+  </g>
+  <text x="61" y="777" class="body">d = 0.55 × (p<tspan baseline-shift="sub" font-size="13">raise</tspan> − p<tspan baseline-shift="sub" font-size="13">lower</tspan>)</text>
+  <path d="M514 736 H542" class="arrow"/>
+  <rect x="547" y="675" width="613" height="122" rx="10" fill="#193846"/>
+  <text x="568" y="703" class="tag" style="fill:#a5d6c4">FINAL DETECTION SCORE</text>
+  <text x="568" y="738" style="font-size:27px;font-weight:700;fill:white">S = Q + 0.25 × (d − 0.035259)</text>
+  <text x="568" y="772" class="body light">S &gt; 0 → stego <tspan fill="#91a8b1">  ·  </tspan> S ≤ 0 → cover</text>
+  <!-- Training-only signals never enter the image scoring path. -->
+  <rect x="40" y="822" width="1120" height="113" rx="11" fill="#f7f3e9" stroke="#c5b593" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="61" y="852" class="tag" style="fill:#806534">GATE TRAINING ONLY</text>
+  <text x="61" y="880" class="body">Four source-grouped folds yield out-of-fold residual scores. Each action is rewarded relative to its training anchor.</text>
+  <text x="61" y="906" class="row" style="fill:#735b32">Fix +1  ·  Break −1  ·  Unchanged 0</text>
+  <text x="427" y="906" class="small">Binary cross-entropy + paired ranking − expected reward + regularization.</text>
+</svg>
