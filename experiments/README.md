@@ -1,5 +1,7 @@
 # Seed 73 experiment
 
+The subsequent [CoTraceNet-Lite experiment](lite73/README.md) compares parameter counts, CPU inference latency and accuracy on both this cohort and a further source-disjoint HILL test.
+
 The primary endpoint was single-image detection accuracy on HILL at 0.4 bits per pixel (bpp). The two prespecified controls were the earlier fourth-order residual expert C and the earlier validation-selected fixed fusion F. All measurements below use the fourth held-out cohort.
 
 | Detector | WOW 0.1 | WOW 0.4 | HILL 0.1 | HILL 0.4 | J-UNIWARD 0.3 |

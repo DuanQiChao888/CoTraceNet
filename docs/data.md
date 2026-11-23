@@ -28,6 +28,16 @@ The initial 512-image pool uses 64 equal strata in physical ZIP order. In each s
 
 To prepare your own split, pass `--selection /path/to/private.csv`. Supply columns `source` and `split`, where each source is an archive member's basename and the split is `train`, `val` or `test`. To generate only the principal evaluation condition, pass `--conditions HILL_04`.
 
+### Independent Lite evaluation
+
+The Lite study reuses the original training and validation split. Its primary test draws 256 new source photographs from the remaining 8,592 after excluding all 1,408 previously used sources. The draw uses NumPy PCG64 seed 20261127 on numerically sorted filenames. Both the original and the fresh HILL 0.4 tests contain 256 covers and 256 stego images. Prepare the fresh test in its own output directory.
+
+```sh
+python tools/prepare_pairs.py --archive /path/to/BOSSbase_1.01.zip --out work/fresh --cohort fresh --conditions HILL_04
+```
+
+The resulting manifest is `work/fresh/test/HILL_04/manifest.csv`. The implementation verifies a digest of the ordered selection. All 256 source identities and all 512 generated image hashes were checked against the locked study. Keep the fourth and fresh cohorts in separate score tables when computing paired comparisons.
+
 ### Image generation
 
 - All source images are resized from 512 × 512 to 256 × 256 using Pillow bicubic interpolation before embedding.

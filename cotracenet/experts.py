@@ -48,7 +48,7 @@ def paired_discriminant(x, ridge, eta):
     return w, b
 
 
-def fit_action(x, reg, dim):
+def fit_action(x, reg, dim, *, count=32, seed=73):
     if dim == 0:
         return paired_discriminant(x, reg, 1)
     # Regularized random-subspace discriminants. Each subspace receives all 160
@@ -56,8 +56,8 @@ def fit_action(x, reg, dim):
     dims = x.shape[-1]
     w = torch.zeros(dims, device=x.device, dtype=x.dtype)
     b = torch.zeros((), device=x.device, dtype=x.dtype)
-    rng = np.random.default_rng(73)
-    groups = [rng.choice(dims, dim, replace=False) for _ in range(32)]
+    rng = np.random.default_rng(seed)
+    groups = [rng.choice(dims, dim, replace=False) for _ in range(count)]
     for indices in groups:
         ix = torch.as_tensor(indices, device=x.device)
         ww, bb = paired_discriminant(x[:, :, ix], reg, 1)

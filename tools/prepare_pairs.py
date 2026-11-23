@@ -35,7 +35,7 @@ def archive_members(archive):
     return members
 
 
-def study_split(members):
+def study_split(members, cohort="original"):
     """Rebuild the historical source IDs from archive order and public seeds."""
     if set(members) != {f"{n}.pgm" for n in range(1, 10001)}:
         raise ValueError("The study split requires the original 10,000-image BOSSbase 1.01 ZIP")
@@ -64,7 +64,18 @@ def study_split(members):
     recipe = "".join(f"{split}\t{name}\n" for split,name in selections).encode("ascii")
     if sha(recipe) != "2d6677edfabf225d9a6b734311b357dca5ce38358170ff9d738421b33ded9d41":
         raise ValueError("The archive member order differs from the historical study archive")
-    return selections
+    if cohort == "original":
+        return selections
+    if cohort != "fresh":
+        raise ValueError(f"Unknown test cohort: {cohort}")
+    eligible = sorted(set(names) - used, key=numeric)
+    assert len(eligible) == 8592
+    fresh = np.random.default_rng(20261127).choice(eligible, 256, replace=False)
+    test = [("test", name) for name in sorted(fresh, key=numeric)]
+    recipe = "".join(f"{split}\t{name}\n" for split, name in test).encode("ascii")
+    if sha(recipe) != "d7593b975fa1192699b7b01d6b05c5bcd33434fef0c0b0222bb7d62c190b0c74":
+        raise ValueError("The fresh test split differs from the locked protocol")
+    return test
 
 
 def private_split(path, members):
@@ -195,7 +206,7 @@ def prepare(args):
         raise ValueError("Specify at least one worker and distinct conditions")
     with ZipFile(args.archive) as archive:
         members = archive_members(archive)
-        rows = private_split(args.selection,members) if args.selection else study_split(members)
+        rows = private_split(args.selection,members) if args.selection else study_split(members,args.cohort)
         jobs = [(s,n,members[n]) for s,n in rows]
     args.out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(dir=args.out.parent) as scratch:
@@ -231,7 +242,10 @@ if __name__=="__main__":
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--archive",required=True,type=Path,help="Local official BOSSbase 1.01 ZIP")
     p.add_argument("--out",required=True,type=Path,help="New output directory")
-    p.add_argument("--selection",type=Path,help="Optional private CSV with source and split columns")
+    split_options = p.add_mutually_exclusive_group()
+    split_options.add_argument("--selection",type=Path,help="Optional private CSV with source and split columns")
+    split_options.add_argument("--cohort",choices=("original","fresh"),default="original",
+                               help="Original train/validation/test split, or the independent 256-source test cohort")
     p.add_argument("--conditions",nargs="+",choices=CONDITIONS,default=list(CONDITIONS),
                    help="Test conditions (training always uses HILL 0.4)")
     p.add_argument("--workers",type=int,default=4)

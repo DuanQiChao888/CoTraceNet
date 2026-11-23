@@ -71,18 +71,18 @@ def intervals(by_source):
     return 100 * np.quantile(estimates, [0.025, 0.975])
 
 
-def summarize(condition, scores):
+def summarize(condition, scores, target="CoTraceNet"):
     hits = {method: (value > 0) == np.array([False, True]) for method, value in scores.items()}
-    if "CoTraceNet" not in hits:
-        raise ValueError("A detector named CoTraceNet is required for the paired comparisons.")
+    if target not in hits:
+        raise ValueError(f"Missing detector for paired comparisons: {target}")
     metrics, contrasts = [], []
     for method, hit in hits.items():
         tn, tp = hit.sum(axis=0)
         metrics.append((condition, method, hit.size, int(hit.sum()), int(tp), int(tn),
                         float(100 * hit.mean()), auc(scores[method])))
-        if method == "CoTraceNet":
+        if method == target:
             continue
-        changed = hits["CoTraceNet"].astype(np.int8) - hit.astype(np.int8)
+        changed = hits[target].astype(np.int8) - hit.astype(np.int8)
         by_source = changed.mean(axis=1)
         lo, hi = intervals(by_source)
         contrasts.append((condition, method, len(hit), int((changed > 0).sum()),
@@ -116,6 +116,7 @@ def main():
                         help="Score CSV pattern with optional {condition}, followed by METHOD=COLUMN overrides. "
                              "Repeat for additional model score files. Default columns match the final scorer.")
     parser.add_argument("--conditions", nargs="+", default=CONDITIONS, help="Ordered condition identifiers.")
+    parser.add_argument("--target", default="CoTraceNet", help="Detector compared against each reference.")
     parser.add_argument("--out", required=True, type=Path, help="Directory for two aggregate CSVs.")
     args = parser.parse_args()
     tables = [parse_table(spec) for spec in args.table]
@@ -137,7 +138,7 @@ def main():
             if new.keys() & scores.keys():
                 raise ValueError(f"Model supplied by multiple files: {new.keys() & scores.keys()}")
             scores.update(new)
-        metrics, contrasts = summarize(condition, scores)
+        metrics, contrasts = summarize(condition, scores, args.target)
         metric_rows.extend(metrics)
         contrast_rows.extend(contrasts)
     args.out.mkdir(parents=True, exist_ok=True)
