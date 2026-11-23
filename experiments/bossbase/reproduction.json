@@ -1,0 +1,154 @@
+{
+  "dataset": "BOSSbase 1.01, 256x256 grayscale, 0.4 bpp, 6,000 / 1,000 / 3,000 source pairs separately for each embedding algorithm",
+  "seed": 73,
+  "full_iterative_training": {
+    "verification": "Retrained the public two-stage solver on the historical run's frozen descriptors after verifying the manifest digest, descriptor digests and ordered source identities. Compared selected indices, coefficients, scores and zero-threshold decisions against independently saved run artifacts. WOW selected the ridge and iteration on validation. HILL reused that recipe and fitted its own indices and coefficients from scratch.",
+    "environment": {
+      "system": "Linux",
+      "python": "3.10.12",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "pytorch": "2.11.0+cu126",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "precision": "float64",
+      "OPENBLAS_NUM_THREADS": 2,
+      "MKL_NUM_THREADS": 2,
+      "OMP_NUM_THREADS": 2
+    },
+    "results": {
+      "WOW_0.4": {
+        "weight_max_absolute_difference": 0.0,
+        "bias_absolute_difference": 0.0,
+        "score_max_absolute_difference": 3.090860900556436e-13,
+        "identical_feature_indices": true,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "readout_lambda": 0.01,
+        "readout_iterations": 100,
+        "metrics": {
+          "auc": 0.9251556666666667,
+          "accuracy": 0.8308333333333333,
+          "balanced_accuracy": 0.8308333333333333,
+          "sensitivity": 0.8393333333333334,
+          "specificity": 0.8223333333333334
+        },
+        "matching_coefficients_and_intercept": true
+      },
+      "HILL_0.4": {
+        "weight_max_absolute_difference": 0.0,
+        "bias_absolute_difference": 0.0,
+        "score_max_absolute_difference": 4.334310688136611e-13,
+        "identical_feature_indices": true,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "readout_lambda": 0.01,
+        "readout_iterations": 100,
+        "metrics": {
+          "auc": 0.8727916666666666,
+          "accuracy": 0.7681666666666667,
+          "balanced_accuracy": 0.7681666666666667,
+          "sensitivity": 0.772,
+          "specificity": 0.7643333333333333
+        },
+        "matching_coefficients_and_intercept": true
+      }
+    }
+  },
+  "raw_image_inference": {
+    "verification": "Used the public descriptor extractor and affine decision function on pre-existing test subsets. Verified both the cover and stego file digests against the corresponding full-scale test manifest before scoring with the saved coefficients. These subsets are part of the full-scale tests above.",
+    "environment": {
+      "system": "Windows",
+      "device": "CPU",
+      "numpy": "2.3.4",
+      "pytorch": "2.9.0+cpu"
+    },
+    "results": {
+      "WOW_0.4": {
+        "test_images": 512,
+        "matching_zero_threshold_decisions": 512,
+        "max_abs_score_difference_upper_bound": 1.61e-13
+      },
+      "HILL_0.4": {
+        "test_images": 512,
+        "matching_zero_threshold_decisions": 512,
+        "max_abs_score_difference_upper_bound": 3.95e-13
+      }
+    }
+  },
+  "note": "Numerical equality refers to this recorded environment. BLAS thread count and numerical library versions can change the optimization path.",
+  "closed_and_fixed_coordinate_ablations": {
+    "verification": "Re-fitted the released fixed-parameter Fisher model on each algorithm's training features, then fitted the logistic head using those Fisher coordinates. The WOW hybrid selected its head on WOW validation. The HILL hybrid used the resulting optimization settings and its own HILL Fisher coordinates. The same verified caches and test comparison as the full-iterative replay were used. All Fisher components ran sequentially on one GPU in the public replay.",
+    "environment": {
+      "software": "Same Linux, NumPy, SciPy, PyTorch and GPU model as the full iterative replay above.",
+      "OPENBLAS_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": 1,
+      "OMP_NUM_THREADS": 1
+    },
+    "results": {
+      "wow_fisher": {
+        "weight_max_absolute_difference": 9.19153642087167e-13,
+        "bias_absolute_difference": 3.82804898890754e-13,
+        "score_max_absolute_difference": 4.998224056862455e-13,
+        "matching_feature_indices": 16384,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "metrics": {
+          "auc": 0.8864645555555556,
+          "accuracy": 0.7841666666666667,
+          "balanced_accuracy": 0.7841666666666667,
+          "sensitivity": 0.8193333333333334,
+          "specificity": 0.749
+        },
+        "matching_coefficients_and_intercept": false
+      },
+      "wow_hybrid": {
+        "weight_max_absolute_difference": 0.0,
+        "bias_absolute_difference": 0.0,
+        "score_max_absolute_difference": 4.39648317751562e-14,
+        "matching_feature_indices": 16384,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "metrics": {
+          "auc": 0.9243823333333333,
+          "accuracy": 0.8291666666666667,
+          "balanced_accuracy": 0.8291666666666666,
+          "sensitivity": 0.84,
+          "specificity": 0.8183333333333334
+        },
+        "matching_coefficients_and_intercept": true
+      },
+      "hill_fisher": {
+        "weight_max_absolute_difference": 0.0,
+        "bias_absolute_difference": 0.0,
+        "score_max_absolute_difference": 7.460698725481052e-14,
+        "matching_feature_indices": 16384,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "metrics": {
+          "auc": 0.8398855555555556,
+          "accuracy": 0.7401666666666666,
+          "balanced_accuracy": 0.7401666666666666,
+          "sensitivity": 0.8126666666666666,
+          "specificity": 0.6676666666666666
+        },
+        "matching_coefficients_and_intercept": true
+      },
+      "hill_hybrid": {
+        "weight_max_absolute_difference": 0.0,
+        "bias_absolute_difference": 0.0,
+        "score_max_absolute_difference": 3.552713678800501e-14,
+        "matching_feature_indices": 16384,
+        "matching_decisions": 6000,
+        "total_images": 6000,
+        "metrics": {
+          "auc": 0.8722713333333333,
+          "accuracy": 0.767,
+          "balanced_accuracy": 0.767,
+          "sensitivity": 0.7803333333333333,
+          "specificity": 0.7536666666666667
+        },
+        "matching_coefficients_and_intercept": true
+      }
+    }
+  }
+}

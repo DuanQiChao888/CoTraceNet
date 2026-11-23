@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="606" viewBox="0 0 1000 606" role="img" aria-labelledby="title desc">
+  <title id="title">CoTraceNet-Lite: residual co-occurrence and two-stage logistic fitting</title>
+  <desc id="desc">For one grayscale image, concatenate 936 global triplet, 8,112 texture quartet and 25,350 five-region quartet coordinates. Select 16,384 coordinates using the learned index set I and apply a linear score. Positive scores indicate stego. Offline, use training-only normalization and a full-dimensional L2 logistic selector, rank absolute standardized coefficients, then refit on the retained coordinates. Fold normalization into the exported weights and bias. The WOW validation configuration was reused on HILL with newly fitted indices and coefficients.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 9 8" refX="7" refY="4" markerWidth="7" markerHeight="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 8 4 0 8Z" fill="#536777"/>
+    </marker>
+    <linearGradient id="pixels" x2="100%" y2="100%" gradientUnits="objectBoundingBox">
+      <stop stop-color="#d9e2e6"/><stop offset=".48" stop-color="#a6b9c5"/><stop offset="1" stop-color="#526c7b"/>
+    </linearGradient>
+    <pattern id="mesh" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M8 0H0V8" fill="none" stroke="#f7fafb" stroke-width="1"/>
+    </pattern>
+    <pattern id="selected" width="13" height="12" patternUnits="userSpaceOnUse">
+      <rect width="9" height="12" rx="1" fill="#8170ae"/>
+    </pattern>
+    <style>
+      text{font-family:"Segoe UI",Arial,Helvetica,sans-serif;fill:#20364a}
+      .title{font-size:30px;font-weight:700;letter-spacing:-.7px}
+      .section{font-size:23px;font-weight:700;letter-spacing:-.4px}
+      .axis{font-size:15px;fill:#516574}
+      .key{font-size:18px;font-weight:650}
+      .small{font-size:15px}
+      .strong{font-size:15px;font-weight:700}
+      .link{fill:none;stroke:#536777;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+      .edge{fill:none;stroke:#536777;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1000" height="606" rx="12" fill="#fff"/>
+  <text class="title" x="28" y="43">CoTraceNet-Lite</text>
+  <text class="axis" x="29" y="69">Single-image steganalysis with residual co-occurrence features</text>
+  <path d="M28 86H972" stroke="#d5dfe2"/>
+
+  <!-- A. The published detector; all image iconography is purely schematic. -->
+  <path d="M29 109v22" stroke="#13796d" stroke-width="4"/>
+  <text class="section" x="42" y="127">Single-image inference</text>
+  <text class="axis" x="967" y="126" text-anchor="end">16,385 learned parameters</text>
+
+  <g>
+    <rect x="28" y="184" width="133" height="135" rx="8" fill="#f1f5f7" stroke="#c8d5db"/>
+    <rect x="69" y="200" width="50" height="43" rx="3" fill="url(#pixels)" stroke="#77909e"/>
+    <path d="M69 225h15v-9h10v7h10v-15h15v35H69Z" fill="#607d8c" opacity=".77"/>
+    <rect x="69" y="200" width="50" height="43" rx="3" fill="url(#mesh)"/>
+    <text class="key" x="94.5" y="270" text-anchor="middle">Grayscale</text>
+    <text class="axis" x="94.5" y="295" text-anchor="middle">256 × 256 px</text>
+  </g>
+  <path class="link" d="M161 252h13m0-74v147"/>
+  <path class="edge" d="M174 178h18"/>
+  <path class="edge" d="M174 252h18"/>
+  <path class="edge" d="M174 325h18"/>
+  <g>
+    <rect x="194" y="148" width="215" height="60" rx="7" fill="#e7f2f8" stroke="#a5c8da"/>
+    <path d="M205 190v-11h4v11zm7 0v-22h4v22zm7 0v-16h4v16zm7 0v-8h4v8z" fill="#3c81a2"/>
+    <text class="key" x="242" y="173">Global triplets</text>
+    <text class="small" x="242" y="195">936 coordinates</text>
+    <rect x="194" y="221" width="215" height="60" rx="7" fill="#fcf0df" stroke="#dfc08f"/>
+    <path d="M205 263v-9h4v9zm7 0v-16h4v16zm7 0v-23h4v23zm7 0v-13h4v13z" fill="#aa712a"/>
+    <text class="key" x="242" y="246">Texture quartets</text>
+    <text class="small" x="242" y="268">8,112 coordinates</text>
+    <rect x="194" y="295" width="215" height="60" rx="7" fill="#e4f3eb" stroke="#a7cbba"/>
+    <path d="M205 337v-22h4v22zm7 0v-13h4v13zm7 0v-19h4v19zm7 0v-8h4v8z" fill="#3e896b"/>
+    <text class="key" x="242" y="320">5-region quartets</text>
+    <text class="small" x="242" y="342">25,350 coordinates</text>
+  </g>
+  <path class="link" d="M409 178h15v147h-15m0-73h15"/>
+  <path class="edge" d="M424 252h15"/>
+  <g>
+    <rect x="442" y="184" width="144" height="135" rx="8" fill="#f6f8f9" stroke="#c8d5db"/>
+    <g transform="translate(466 210)">
+      <rect width="14" height="15" rx="1.5" fill="#5994ad"/><rect x="17" width="26" height="15" rx="1.5" fill="#c78f43"/>
+      <rect x="46" width="49" height="15" rx="1.5" fill="#5d9c81"/>
+    </g>
+    <text class="key" x="514" y="252" text-anchor="middle">Concatenate</text>
+    <text class="axis" x="514" y="277" text-anchor="middle">34,398 values</text>
+    <text class="strong" x="514" y="301" text-anchor="middle">x</text>
+  </g>
+  <path class="edge" d="M586 252h22"/>
+  <g>
+    <rect x="611" y="184" width="143" height="135" rx="8" fill="#f0ecf8" stroke="#c7b9dc"/>
+    <rect x="646" y="210" width="76" height="15" rx="2" fill="url(#selected)"/>
+    <text class="key" x="682.5" y="252" text-anchor="middle">Gather by I</text>
+    <text class="axis" x="682.5" y="277" text-anchor="middle">16,384 values</text>
+    <text class="strong" x="682.5" y="301" text-anchor="middle">x[I]</text>
+  </g>
+  <path class="edge" d="M754 252h24"/>
+  <g>
+    <rect x="781" y="184" width="191" height="135" rx="8" fill="#e4f2ef" stroke="#9dc4b9"/>
+    <text class="key" x="876.5" y="212" text-anchor="middle">Linear score</text>
+    <text class="small" x="876.5" y="236" text-anchor="middle">s = wᵀ x[I] + b</text>
+    <path d="M796 250h161" stroke="#b6d4cb"/>
+    <text class="strong" x="799" y="276">s &gt; 0</text><text class="small" x="876" y="276">Stego</text>
+    <text class="strong" x="799" y="303">s ≤ 0</text><text class="small" x="876" y="303">Cover</text>
+  </g>
+
+  <!-- B. Standardization is learned only from training rows. Validation selects the WOW readout. -->
+  <rect x="16" y="376" width="968" height="214" rx="11" fill="#f5f7fa"/>
+  <path d="M30 395v22" stroke="#75689e" stroke-width="4"/>
+  <text class="section" x="43" y="414">Offline training</text>
+  <text class="axis" x="970" y="413" text-anchor="end">Full-batch L-BFGS-B · L2 logistic loss</text>
+  <g>
+    <rect x="28" y="433" width="170" height="93" rx="7" fill="#fff" stroke="#c4d2dc"/>
+    <text class="key" x="41" y="459">Standardize x</text>
+    <text class="small" x="41" y="486">Use training means</text>
+    <text class="small" x="41" y="508">and deviations</text>
+  </g>
+  <path class="edge" d="M198 479h14"/>
+  <g>
+    <rect x="215" y="433" width="214" height="93" rx="7" fill="#e8eff7" stroke="#b7c9db"/>
+    <text class="key" x="228" y="459">Fit selector</text>
+    <text class="small" x="228" y="486">All 34,398 coordinates</text>
+    <text class="small" x="228" y="508">λ = 0.1 · ≤ 200 updates</text>
+  </g>
+  <path class="edge" d="M429 479h14"/>
+  <g>
+    <rect x="446" y="433" width="250" height="93" rx="7" fill="#f0ecf8" stroke="#c7b9dc"/>
+    <text class="key" x="459" y="459">Select index set I</text>
+    <text class="small" x="459" y="486">Rank standardized |w|</text>
+    <text class="small" x="459" y="508">Keep the top 16,384</text>
+  </g>
+  <path class="edge" d="M696 479h14"/>
+  <g>
+    <rect x="713" y="433" width="259" height="93" rx="7" fill="#e4f2ef" stroke="#9dc4b9"/>
+    <text class="key" x="726" y="459">Refit on selected features</text>
+    <text class="small" x="726" y="486">Initialize w and b at zero</text>
+    <text class="small" x="726" y="508">λ = 0.01 · 100 updates</text>
+  </g>
+  <text class="small" x="32" y="551"><tspan font-weight="700">Selection:</tspan> WOW validation AUC chose the readout setting. HILL reused it and refit both stages on HILL training data.</text>
+  <text class="small" x="32" y="575"><tspan font-weight="700">Export:</tspan> Fold normalization into w and b. Store I, 16,384 coefficients and one bias for inference.</text>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "condition": "BOSSbase 1.01 HILL 0.4, per-image end-to-end inference, file decode through final score",
+  "protocol": "12 first test source IDs sorted lexicographically, 24 images, 3 rounds, alternating model order; weights resident; all image bytes in OS cache, 2 warmup calls per model; batch size=1",
+  "parameter_convention": "CNN trainable tensors; Lite floating coefficients plus intercept. Coordinate indices and hand-engineered filters do not count as learned floating parameters.",
+  "model_parameters": {
+    "ShuffleBANet": 651876,
+    "CoTraceNet-Lite": 16385
+  },
+  "file_bytes": {
+    "ShuffleBANet": 2836939,
+    "CoTraceNet-Lite": 158267
+  },
+  "lite_array_bytes": {
+    "indices": 32768,
+    "weights": 131072,
+    "bias": 8
+  },
+  "cnn_epoch": 20,
+  "cpu": "AMD EPYC 7H12 64-Core Processor",
+  "torch_threads": 1,
+  "blas_threads": 1,
+  "torch": "2.11.0+cu126",
+  "numpy": "2.2.6",
+  "samples_per_model": 72,
+  "median_ms": {
+    "ShuffleBANet": 291.780129,
+    "CoTraceNet-Lite": 64.44377850000001
+  },
+  "quartiles_ms": {
+    "ShuffleBANet": [
+      286.32962825,
+      300.11417725
+    ],
+    "CoTraceNet-Lite": [
+      63.405266499999996,
+      65.78696175
+    ]
+  },
+  "repeat_medians_ms": {
+    "ShuffleBANet": [
+      288.082678,
+      297.1762645,
+      290.358907
+    ],
+    "CoTraceNet-Lite": [
+      64.7005415,
+      65.0023955,
+      63.9952835
+    ]
+  },
+  "ratio_cnn_over_lite": 4.52766947859831,
+  "score_agreements": {
+    "ShuffleBANet": 72,
+    "CoTraceNet-Lite": 72
+  }
+}

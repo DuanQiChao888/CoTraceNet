@@ -1,5 +1,7 @@
 # Rebuilding the detection benchmarks
 
+The current full BOSSbase experiment uses `python tools/prepare_fullscale.py --archive /path/to/BOSSbase_1.01.zip --out work/boss`. It writes separate WOW and HILL manifests for the same 6,000 / 1,000 / 3,000 training, validation, and test pairs. The procedure below reproduces the earlier small-cohort experiments. [Current results and training commands](../README.md)
+
 Download the original [BOSSbase 1.01 archive](https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip) from Binghamton University's DDE Lab. Keep the ZIP intact. The sampler uses the original order of the archive members.
 
 From the repository root, install the preparation dependencies in a separate Python environment and choose a new output directory.
@@ -41,5 +43,5 @@ The resulting manifest is `work/fresh/test/HILL_04/manifest.csv`. The implementa
 ### Image generation
 
 - All source images are resized from 512 × 512 to 256 × 256 using Pillow bicubic interpolation before embedding.
-- HILL and WOW use ideal independent ternary modifications with an entropy tolerance of 0.00001 bpp. A per-source hash seeds the same random field across spatial conditions. The preparation code computes spatial costs and samples evaluation perturbations. For WOW it obtains the Daubechies filter taps from [conSeal](https://github.com/uibk-uncover/conseal).
+- HILL and WOW use ideal independent ternary modifications with an entropy tolerance of 0.00001 bpp. A per-source hash seeds the same random field across spatial conditions. The preparation code computes spatial costs and samples evaluation perturbations. The WOW calculation uses the 16 Daubechies-8 high-pass coefficients at the precision of the DDE Lab reference implementation. [Reference implementations](https://dde.binghamton.edu/download/stego_algorithms/)
 - J-UNIWARD compresses each resized image at quality 85, simulates the original J-UNIWARD method on quantized DCT coefficients, writes the resulting coefficients back to a JPEG, and decodes the cover and stego image with the same libjpeg 6b backend. Payload is measured per nonzero cover AC coefficient. The JPEG round trip uses [jpeglib](https://github.com/martinbenes1996/jpeglib) and [conSeal](https://github.com/uibk-uncover/conseal).

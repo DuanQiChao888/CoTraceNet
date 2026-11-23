@@ -1,4 +1,8 @@
-# Seed 73 experiment
+# Detector experiments
+
+The current [full BOSSbase experiment](bossbase/README.md) evaluates iterative CoTraceNet-Lite on WOW and HILL with 6,000 training, 1,000 validation and 3,000 test pairs per algorithm. It includes matched classifier and coordinate-selection ablations, independently trained ShuffleBANet references, and validation-calibrated false-positive budgets.
+
+## Historical seed 73 experiment
 
 The subsequent [CoTraceNet-Lite experiment](lite73/README.md) compares parameter counts, CPU inference latency and accuracy on both this cohort and a further source-disjoint HILL test.
 

@@ -1,0 +1,262 @@
+{
+  "decision": "score > 0 predicts stego for validation and test metrics",
+  "bootstrap": {
+    "unit": "source pair",
+    "draws": 10000,
+    "seed": 7319
+  },
+  "models": {
+    "Closed": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1462,
+        "true_negative": 652,
+        "true_positive": 810,
+        "false_positive": 348,
+        "false_negative": 190,
+        "accuracy": 0.731,
+        "specificity": 0.652,
+        "sensitivity": 0.81,
+        "auc": 0.832697
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4441,
+        "true_negative": 2003,
+        "true_positive": 2438,
+        "false_positive": 997,
+        "false_negative": 562,
+        "accuracy": 0.7401666666666666,
+        "specificity": 0.6676666666666666,
+        "sensitivity": 0.8126666666666666,
+        "auc": 0.8398855555555556
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 0.5291604737270954,
+        "validation_false_positives": 50,
+        "test_false_positives": 143,
+        "test_true_positives": 1190,
+        "test_fpr": 0.04766666666666667,
+        "test_tpr": 0.39666666666666667
+      }
+    },
+    "Hybrid": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1540,
+        "true_negative": 753,
+        "true_positive": 787,
+        "false_positive": 247,
+        "false_negative": 213,
+        "accuracy": 0.77,
+        "specificity": 0.753,
+        "sensitivity": 0.787,
+        "auc": 0.8638669999999999
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4602,
+        "true_negative": 2261,
+        "true_positive": 2341,
+        "false_positive": 739,
+        "false_negative": 659,
+        "accuracy": 0.767,
+        "specificity": 0.7536666666666667,
+        "sensitivity": 0.7803333333333333,
+        "auc": 0.8722713333333333
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 1.4707703829088938,
+        "validation_false_positives": 50,
+        "test_false_positives": 135,
+        "test_true_positives": 1432,
+        "test_fpr": 0.045,
+        "test_tpr": 0.47733333333333333
+      }
+    },
+    "CoTraceNet-Lite": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1519,
+        "true_negative": 753,
+        "true_positive": 766,
+        "false_positive": 247,
+        "false_negative": 234,
+        "accuracy": 0.7595,
+        "specificity": 0.753,
+        "sensitivity": 0.766,
+        "auc": 0.862429
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4609,
+        "true_negative": 2293,
+        "true_positive": 2316,
+        "false_positive": 707,
+        "false_negative": 684,
+        "accuracy": 0.7681666666666667,
+        "specificity": 0.7643333333333333,
+        "sensitivity": 0.772,
+        "auc": 0.8727916666666666
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 1.6654583392432265,
+        "validation_false_positives": 50,
+        "test_false_positives": 136,
+        "test_true_positives": 1449,
+        "test_fpr": 0.04533333333333334,
+        "test_tpr": 0.483
+      }
+    },
+    "ShuffleBANet-epoch13": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1521,
+        "true_negative": 882,
+        "true_positive": 639,
+        "false_positive": 118,
+        "false_negative": 361,
+        "accuracy": 0.7605,
+        "specificity": 0.882,
+        "sensitivity": 0.639,
+        "auc": 0.876239
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4597,
+        "true_negative": 2661,
+        "true_positive": 1936,
+        "false_positive": 339,
+        "false_negative": 1064,
+        "accuracy": 0.7661666666666667,
+        "specificity": 0.887,
+        "sensitivity": 0.6453333333333333,
+        "auc": 0.8804014444444443
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 0.7386058568954468,
+        "validation_false_positives": 50,
+        "test_false_positives": 142,
+        "test_true_positives": 1586,
+        "test_fpr": 0.04733333333333333,
+        "test_tpr": 0.5286666666666666
+      }
+    },
+    "ShuffleBANet-epoch20": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1516,
+        "true_negative": 818,
+        "true_positive": 698,
+        "false_positive": 182,
+        "false_negative": 302,
+        "accuracy": 0.758,
+        "specificity": 0.818,
+        "sensitivity": 0.698,
+        "auc": 0.870056
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4508,
+        "true_negative": 2422,
+        "true_positive": 2086,
+        "false_positive": 578,
+        "false_negative": 914,
+        "accuracy": 0.7513333333333333,
+        "specificity": 0.8073333333333333,
+        "sensitivity": 0.6953333333333334,
+        "auc": 0.8696550000000001
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 0.941922664642334,
+        "validation_false_positives": 50,
+        "test_false_positives": 173,
+        "test_true_positives": 1605,
+        "test_fpr": 0.057666666666666665,
+        "test_tpr": 0.535
+      }
+    }
+  },
+  "test_contrasts": [
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "Closed",
+      "delta_accuracy_pp": 2.8000000000000003,
+      "ci95_pp": [
+        1.9166666666666665,
+        3.65
+      ],
+      "corrected": 614,
+      "introduced": 446,
+      "net_cover_correct": 290,
+      "net_stego_correct": -122
+    },
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "Hybrid",
+      "delta_accuracy_pp": 0.11666666666666668,
+      "ci95_pp": [
+        -0.4,
+        0.6333333333333333
+      ],
+      "corrected": 145,
+      "introduced": 138,
+      "net_cover_correct": 32,
+      "net_stego_correct": -25
+    },
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "ShuffleBANet-epoch13",
+      "delta_accuracy_pp": 0.2,
+      "ci95_pp": [
+        -0.8166666666666665,
+        1.2166666666666666
+      ],
+      "corrected": 817,
+      "introduced": 805,
+      "net_cover_correct": -368,
+      "net_stego_correct": 380
+    },
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "ShuffleBANet-epoch20",
+      "delta_accuracy_pp": 1.6833333333333331,
+      "ci95_pp": [
+        0.65,
+        2.7
+      ],
+      "corrected": 894,
+      "introduced": 793,
+      "net_cover_correct": -129,
+      "net_stego_correct": 230
+    },
+    {
+      "candidate": "Hybrid",
+      "reference": "Closed",
+      "delta_accuracy_pp": 2.6833333333333336,
+      "ci95_pp": [
+        1.8166666666666669,
+        3.55
+      ],
+      "corrected": 584,
+      "introduced": 423,
+      "net_cover_correct": 258,
+      "net_stego_correct": -97
+    }
+  ]
+}

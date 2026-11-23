@@ -19,3 +19,15 @@ __pycache__/
 *.jpg
 *.jpeg
 *.zip
+*.tar
+*.tar.gz
+*.tgz
+*.pt.tmp
+*.safetensors
+*.h5
+*.hdf5
+/checkpoints/
+/cache/
+manifest*.csv
+scores*.csv
+*-scores.csv

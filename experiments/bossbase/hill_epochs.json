@@ -1,0 +1,43 @@
+{
+  "candidate_selection": "highest validation AUC evaluated during training; use earliest epoch to break a tie",
+  "selected_epoch": 20,
+  "source_pairs": {
+    "train": 6000,
+    "validation": 1000,
+    "test": 3000
+  },
+  "epochs": [
+    {
+      "epoch": 20,
+      "selection_validation_auc": 0.870057,
+      "validation_accuracy": 0.758,
+      "test_correct": 4508,
+      "test_accuracy": 0.7513333333333333,
+      "test_auc": 0.8696550000000001
+    },
+    {
+      "epoch": 50,
+      "selection_validation_auc": 0.843075,
+      "validation_accuracy": 0.7615,
+      "test_correct": 4594,
+      "test_accuracy": 0.7656666666666667,
+      "test_auc": 0.8511133333333334
+    },
+    {
+      "epoch": 100,
+      "selection_validation_auc": 0.821951,
+      "validation_accuracy": 0.7605,
+      "test_correct": 4593,
+      "test_accuracy": 0.7655,
+      "test_auc": 0.8306477777777778
+    },
+    {
+      "epoch": 200,
+      "selection_validation_auc": 0.815407,
+      "validation_accuracy": 0.743,
+      "test_correct": 4499,
+      "test_accuracy": 0.7498333333333334,
+      "test_auc": 0.8181254444444443
+    }
+  ]
+}

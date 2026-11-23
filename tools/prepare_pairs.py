@@ -35,7 +35,7 @@ def archive_members(archive):
     return members
 
 
-def study_split(members, cohort="original"):
+def historical_cohorts(members):
     """Rebuild the historical source IDs from archive order and public seeds."""
     if set(members) != {f"{n}.pgm" for n in range(1, 10001)}:
         raise ValueError("The study split requires the original 10,000-image BOSSbase 1.01 ZIP")
@@ -64,10 +64,6 @@ def study_split(members, cohort="original"):
     recipe = "".join(f"{split}\t{name}\n" for split,name in selections).encode("ascii")
     if sha(recipe) != "2d6677edfabf225d9a6b734311b357dca5ce38358170ff9d738421b33ded9d41":
         raise ValueError("The archive member order differs from the historical study archive")
-    if cohort == "original":
-        return selections
-    if cohort != "fresh":
-        raise ValueError(f"Unknown test cohort: {cohort}")
     eligible = sorted(set(names) - used, key=numeric)
     assert len(eligible) == 8592
     fresh = np.random.default_rng(20261127).choice(eligible, 256, replace=False)
@@ -75,7 +71,16 @@ def study_split(members, cohort="original"):
     recipe = "".join(f"{split}\t{name}\n" for split, name in test).encode("ascii")
     if sha(recipe) != "d7593b975fa1192699b7b01d6b05c5bcd33434fef0c0b0222bb7d62c190b0c74":
         raise ValueError("The fresh test split differs from the locked protocol")
-    return test
+    return selections, test, used.union(fresh)
+
+
+def study_split(members, cohort="original"):
+    original, fresh, _ = historical_cohorts(members)
+    if cohort == "original":
+        return original
+    if cohort == "fresh":
+        return fresh
+    raise ValueError(f"Unknown test cohort: {cohort}")
 
 
 def private_split(path, members):
@@ -101,9 +106,14 @@ def separable(image, vertical, horizontal):
 
 
 def wow_cost(image):
-    from conseal.tools.spatial import daubechies8
-
-    (high, low), _ = daubechies8()
+    # Daubechies-8 high-pass taps at the precision of the DDE Lab WOW reference.
+    high = np.array([
+        -0.0544158422, 0.3128715909, -0.6756307363, 0.5853546837,
+        0.0158291053, -0.2840155430, -0.0004724846, 0.1287474266,
+        0.0173693010, -0.0440882539, -0.0139810279, 0.0087460940,
+        0.0048703530, -0.0003917404, -0.0006754494, -0.0001174768,
+    ])
+    low = high[::-1] * ((-1.) ** np.arange(len(high)))
     padded = np.pad(image.astype(np.float64), 16, mode="symmetric")
     cost = np.zeros(image.shape, dtype=np.float64)
     with np.errstate(divide="ignore", invalid="ignore"):
@@ -167,7 +177,7 @@ def source_reader(path):
     return ZipFile(path)
 
 
-def make_source(item, archive_path, output, conditions):
+def make_source(item, archive_path, output, conditions, fullscale=False):
     split,name,member = item
     raw = source_reader(archive_path).read(member)
     digest = sha(raw)
@@ -179,8 +189,8 @@ def make_source(item, archive_path, output, conditions):
     random_field = np.random.default_rng(seed).random(image.shape)
     costs = {}
     results = []
-    for condition in (conditions if split=="test" else ("HILL_04",)):
-        outname = f"test/{condition}" if split=="test" else "train"
+    for condition in (conditions if fullscale or split=="test" else ("HILL_04",)):
+        outname = condition if fullscale else (f"test/{condition}" if split=="test" else "train")
         target = output/outname
         if condition=="JPEG_03":
             cover,stego = jpeg_pair(image,digest)

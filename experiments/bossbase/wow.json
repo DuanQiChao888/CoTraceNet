@@ -1,0 +1,212 @@
+{
+  "decision": "score > 0 predicts stego for validation and test metrics",
+  "bootstrap": {
+    "unit": "source pair",
+    "draws": 10000,
+    "seed": 7319
+  },
+  "models": {
+    "Closed": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1566,
+        "true_negative": 738,
+        "true_positive": 828,
+        "false_positive": 262,
+        "false_negative": 172,
+        "accuracy": 0.783,
+        "specificity": 0.738,
+        "sensitivity": 0.828,
+        "auc": 0.883735
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4705,
+        "true_negative": 2247,
+        "true_positive": 2458,
+        "false_positive": 753,
+        "false_negative": 542,
+        "accuracy": 0.7841666666666667,
+        "specificity": 0.749,
+        "sensitivity": 0.8193333333333334,
+        "auc": 0.8864645555555556
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 0.3782778399131148,
+        "validation_false_positives": 50,
+        "test_false_positives": 163,
+        "test_true_positives": 1648,
+        "test_fpr": 0.05433333333333333,
+        "test_tpr": 0.5493333333333333
+      }
+    },
+    "Hybrid": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1651,
+        "true_negative": 806,
+        "true_positive": 845,
+        "false_positive": 194,
+        "false_negative": 155,
+        "accuracy": 0.8255,
+        "specificity": 0.806,
+        "sensitivity": 0.845,
+        "auc": 0.920468
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4975,
+        "true_negative": 2455,
+        "true_positive": 2520,
+        "false_positive": 545,
+        "false_negative": 480,
+        "accuracy": 0.8291666666666667,
+        "specificity": 0.8183333333333334,
+        "sensitivity": 0.84,
+        "auc": 0.9243823333333333
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 1.291112562891131,
+        "validation_false_positives": 50,
+        "test_false_positives": 134,
+        "test_true_positives": 1886,
+        "test_fpr": 0.04466666666666667,
+        "test_tpr": 0.6286666666666667
+      }
+    },
+    "CoTraceNet-Lite": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1652,
+        "true_negative": 802,
+        "true_positive": 850,
+        "false_positive": 198,
+        "false_negative": 150,
+        "accuracy": 0.826,
+        "specificity": 0.802,
+        "sensitivity": 0.85,
+        "auc": 0.920595
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 4985,
+        "true_negative": 2467,
+        "true_positive": 2518,
+        "false_positive": 533,
+        "false_negative": 482,
+        "accuracy": 0.8308333333333333,
+        "specificity": 0.8223333333333334,
+        "sensitivity": 0.8393333333333334,
+        "auc": 0.9251556666666667
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 1.506628548285009,
+        "validation_false_positives": 50,
+        "test_false_positives": 132,
+        "test_true_positives": 1847,
+        "test_fpr": 0.044,
+        "test_tpr": 0.6156666666666667
+      }
+    },
+    "ShuffleBANet-epoch30": {
+      "validation": {
+        "pairs": 1000,
+        "images": 2000,
+        "correct": 1734,
+        "true_negative": 875,
+        "true_positive": 859,
+        "false_positive": 125,
+        "false_negative": 141,
+        "accuracy": 0.867,
+        "specificity": 0.875,
+        "sensitivity": 0.859,
+        "auc": 0.956914
+      },
+      "test": {
+        "pairs": 3000,
+        "images": 6000,
+        "correct": 5131,
+        "true_negative": 2603,
+        "true_positive": 2528,
+        "false_positive": 397,
+        "false_negative": 472,
+        "accuracy": 0.8551666666666666,
+        "specificity": 0.8676666666666667,
+        "sensitivity": 0.8426666666666667,
+        "auc": 0.951863
+      },
+      "validation_calibrated_threshold": {
+        "target_fpr": 0.05,
+        "cutoff": 1.8699833154678345,
+        "validation_false_positives": 50,
+        "test_false_positives": 137,
+        "test_true_positives": 2222,
+        "test_fpr": 0.04566666666666667,
+        "test_tpr": 0.7406666666666667
+      }
+    }
+  },
+  "test_contrasts": [
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "Closed",
+      "delta_accuracy_pp": 4.666666666666667,
+      "ci95_pp": [
+        3.85,
+        5.516666666666667
+      ],
+      "corrected": 566,
+      "introduced": 286,
+      "net_cover_correct": 220,
+      "net_stego_correct": 60
+    },
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "Hybrid",
+      "delta_accuracy_pp": 0.16666666666666669,
+      "ci95_pp": [
+        -0.2833333333333333,
+        0.6333333333333333
+      ],
+      "corrected": 113,
+      "introduced": 103,
+      "net_cover_correct": 12,
+      "net_stego_correct": -2
+    },
+    {
+      "candidate": "CoTraceNet-Lite",
+      "reference": "ShuffleBANet-epoch30",
+      "delta_accuracy_pp": -2.433333333333333,
+      "ci95_pp": [
+        -3.3000000000000003,
+        -1.5666666666666667
+      ],
+      "corrected": 511,
+      "introduced": 657,
+      "net_cover_correct": -136,
+      "net_stego_correct": -10
+    },
+    {
+      "candidate": "Hybrid",
+      "reference": "Closed",
+      "delta_accuracy_pp": 4.5,
+      "ci95_pp": [
+        3.6833333333333336,
+        5.333333333333334
+      ],
+      "corrected": 558,
+      "introduced": 288,
+      "net_cover_correct": 208,
+      "net_stego_correct": 62
+    }
+  ]
+}
