@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="558" viewBox="0 0 980 558" role="img" aria-labelledby="title desc">
+  <title id="title">CoTraceNet-Lite with dual-view attention and a reward-trained classifier</title>
+  <desc id="desc">A single 256 by 256 grayscale image is converted into residual co-occurrences. All three sets of statistics form the frozen Lite classifier. Matched texture and cost families reweight its baseline score. A single-step policy keeps that score or accepts a bounded candidate. The lower panels show the attention and decision mechanisms.</desc>
+  <defs>
+    <marker id="tip" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" refX="6.4" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7 Z" fill="#31495a"/>
+    </marker>
+    <marker id="pairtip" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" refX="6.4" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7 Z" fill="#207f71"/>
+    </marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#193345}
+      .title{font-size:28px;font-weight:bold}
+      .label{font-size:18px;font-weight:bold}
+      .node{font-size:15px;font-weight:bold;text-anchor:middle}
+      .note{font-size:14px;fill:#46606d}
+      .foot{font-size:14px;fill:#354f5e}
+      .math{font-family:Georgia,serif;font-size:18px;font-style:italic}
+      .frame{fill:none;stroke:#95a6af;stroke-width:1.1;stroke-dasharray:5 4}
+      .flow,.pair{fill:none;stroke:#31495a;stroke-width:1.75;stroke-linejoin:round;stroke-linecap:round}
+      .pair{stroke:#207f71}
+      .op{stroke:#738b96;stroke-width:.8}
+    </style>
+  </defs>
+  <rect width="980" height="558" rx="6" fill="#fff"/>
+  <text x="24" y="43" class="title">CoTraceNet-Lite</text>
+  <text x="262" y="42" font-size="19" fill="#365f6e">Dual-view attention and reward-based classification</text>
+
+  <text x="24" y="90" class="label">(a) Single-image inference</text>
+  <rect x="23" y="107" width="585" height="158" rx="10" class="frame"/>
+  <rect x="621" y="107" width="335" height="158" rx="10" class="frame"/>
+  <!-- The input is a schematic grid, without image or dataset assets. -->
+  <rect x="40" y="164" width="40" height="40" rx="2" fill="#e2e9ec" stroke="#526f80"/>
+  <path d="M50 164v40m10-40v40m10-40v40M40 174h40m-40 10h40m-40 10h40" stroke="#a2b1ba" fill="none"/>
+  <text x="60" y="224" text-anchor="middle" class="note">256 × 256</text>
+  <path d="M81 184h20" class="flow" marker-end="url(#tip)"/>
+  <rect x="102" y="164" width="82" height="40" rx="3" fill="#f1c3c0" class="op"/>
+  <text x="143" y="189" class="node">High-pass</text>
+  <path d="M184 184h13M197 140v88" class="flow"/>
+  <path d="M197 140h17" class="flow" marker-end="url(#tip)"/>
+  <path d="M197 184h17" class="flow" marker-end="url(#tip)"/>
+  <path d="M197 228h17" class="flow" marker-end="url(#tip)"/>
+  <rect x="215" y="124" width="130" height="32" rx="2" fill="#afcdee" class="op"/>
+  <rect x="215" y="168" width="130" height="32" rx="2" fill="#9ddbc8" class="op"/>
+  <rect x="215" y="212" width="130" height="32" rx="2" fill="#d0c0eb" class="op"/>
+  <text x="280" y="145" class="node">Global triples</text>
+  <text x="280" y="189" class="node">Texture quartets</text>
+  <text x="280" y="233" class="node">Cost quartets</text>
+  <path d="M345 140h17v88m-17-44h17m-17 44h17m0-88h24" class="flow" marker-end="url(#tip)"/>
+  <rect x="387" y="124" width="65" height="32" rx="2" fill="#c9deed" class="op"/>
+  <rect x="469" y="124" width="57" height="32" rx="2" fill="#decfee" class="op"/>
+  <rect x="543" y="124" width="57" height="32" rx="2" fill="#bdd7e8" class="op"/>
+  <text x="419.5" y="145" class="node">Concat</text>
+  <text x="497.5" y="145" class="node">Top-k</text>
+  <text x="571.5" y="145" class="node">Linear</text>
+  <path d="M452 140h15" class="flow" marker-end="url(#tip)"/>
+  <path d="M526 140h15" class="flow" marker-end="url(#tip)"/>
+  <text x="387" y="180" class="note">34,398 → 16,384 features</text>
+  <path d="M333 200v6m0 6v-6h26" class="pair"/>
+  <path d="M359 206h8" stroke="#fff" stroke-width="6"/>
+  <path d="M357 206h18v22h11" class="pair" marker-end="url(#pairtip)"/>
+  <rect x="387" y="212" width="106" height="32" rx="2" fill="#b5e2d6" class="op"/>
+  <text x="440" y="233" class="node">Match 16</text>
+  <path d="M600 140h40v34h17" class="flow" marker-end="url(#tip)"/>
+  <text x="615" y="133" class="math">s₀</text>
+  <path d="M493 228h147v-32h17" class="pair" marker-end="url(#pairtip)"/>
+  <text x="499" y="249" class="note">16 matched pairs</text>
+  <rect x="658" y="161" width="92" height="48" rx="3" fill="#89d1be" class="op"/>
+  <text x="704" y="190" class="node">Dual-view</text>
+  <path d="M750 185h33" class="flow" marker-end="url(#tip)"/>
+  <text x="762" y="173" class="math">s</text>
+  <rect x="784" y="161" width="78" height="48" rx="3" fill="#f4b48a" class="op"/>
+  <text x="823" y="190" class="node">Policy</text>
+  <path d="M862 185h17" class="flow" marker-end="url(#tip)"/>
+  <text x="886" y="181" font-size="15" font-weight="bold">Cover /</text>
+  <text x="886" y="200" font-size="15" font-weight="bold">Stego</text>
+  <text x="704" y="232" text-anchor="middle" class="note">Panel (b)</text>
+  <text x="823" y="232" text-anchor="middle" class="note">Panel (c)</text>
+
+  <text x="24" y="310" class="label">(b) Dual-view attention</text>
+  <text x="519" y="310" class="label">(c) Reward-based decision</text>
+  <rect x="23" y="327" width="476" height="200" rx="10" class="frame"/>
+  <rect x="518" y="327" width="438" height="200" rx="10" class="frame"/>
+  <text x="38" y="353" class="note">Matched residual families</text>
+  <rect x="39" y="371" width="106" height="30" rx="2" fill="#9ddbc8" class="op"/>
+  <rect x="39" y="422" width="106" height="30" rx="2" fill="#d0c0eb" class="op"/>
+  <text x="92" y="392" class="node">T₁ ··· T₁₆</text>
+  <text x="92" y="443" class="node">C₁ ··· C₁₆</text>
+  <path d="M145 386h14v51h-14m14-26h16v-27h12" class="flow" marker-end="url(#tip)"/>
+  <path d="M175 411v28h12" class="flow" marker-end="url(#tip)"/>
+  <rect x="188" y="366" width="111" height="36" rx="2" fill="#99d8c6" class="op"/>
+  <text x="243.5" y="389" class="node">SE 32→2→32</text>
+  <rect x="188" y="421" width="111" height="36" rx="2" fill="#d9cbef" class="op"/>
+  <text x="243.5" y="444" class="node">Pair gate</text>
+  <path d="M299 384h46v18h24" class="flow" marker-end="url(#tip)"/>
+  <path d="M299 439h46v-20h24" class="flow" marker-end="url(#tip)"/>
+  <text x="365" y="355" class="math">s₀</text>
+  <path d="M385 359v33" class="flow" marker-end="url(#tip)"/>
+  <circle cx="385" cy="410" r="17" fill="#fff" stroke="#31495a" stroke-width="1.75"/>
+  <text x="385" y="417" font-family="Arial" font-size="24" text-anchor="middle">+</text>
+  <path d="M403 410h43" class="flow" marker-end="url(#tip)"/>
+  <text x="451" y="416" class="math">s</text>
+  <text x="39" y="482" class="foot">SE reweights all 32 scores. The pair gate compares</text>
+  <text x="39" y="503" class="foot">evidence and word distributions within each family.</text>
+  <text x="546" y="351" class="note">View evidence</text>
+  <path d="M595 354v13" class="flow" marker-end="url(#tip)"/>
+  <text x="705" y="351" class="note">Confidence + agreement</text>
+  <path d="M745 356v40" class="flow" marker-end="url(#tip)"/>
+  <text x="532" y="416" class="math">s</text>
+  <path d="M545 410h9v-27h14" class="flow" marker-end="url(#tip)"/>
+  <path d="M554 410v36h136v-25h18" class="flow" marker-end="url(#tip)"/>
+  <rect x="569" y="369" width="113" height="30" rx="2" fill="#f3d68b" class="op"/>
+  <text x="625.5" y="389" class="node">Bounded head</text>
+  <path d="M682 384h12v20h14" class="flow" marker-end="url(#tip)"/>
+  <text x="684" y="378" class="math">s′</text>
+  <text x="578" y="420" class="note">|s′ − s| ≤ 2</text>
+  <rect x="709" y="397" width="67" height="32" rx="2" fill="#f4b48a" class="op"/>
+  <text x="742.5" y="418" class="node">Gate</text>
+  <path d="M776 413h20v-29h17" class="flow" marker-end="url(#tip)"/>
+  <path d="M796 413v29h17" class="flow" marker-end="url(#tip)"/>
+  <rect x="814" y="367" width="112" height="32" rx="2" fill="#c9deed" class="op"/>
+  <text x="870" y="388" class="node">Keep s</text>
+  <rect x="814" y="426" width="112" height="32" rx="2" fill="#f4b48a" class="op"/>
+  <text x="870" y="447" class="node">Accept s′</text>
+  <text x="533" y="482" class="foot">Agree → keep. On disagreement, the policy chooses.</text>
+  <text x="533" y="503" class="foot">Training reward: +1 for a rescue, −1.5 for a new error.</text>
+</svg>
