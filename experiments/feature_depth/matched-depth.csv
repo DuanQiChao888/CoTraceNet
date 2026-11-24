@@ -1,0 +1,5 @@
+﻿source,target,candidate,reference,delta_pp,corrected,introduced,ci_low_pp,ci_high_pp
+WOW,WOW,resmlp,resmlp_shallow,0.1,162,156,-0.45,0.6666666666666666
+WOW,HILL,resmlp,resmlp_shallow,-0.7666666666666667,236,282,-1.4666666666666666,-0.03333333333333333
+HILL,WOW,resmlp,resmlp_shallow,-0.4166666666666667,311,336,-1.15,0.3333333333333333
+HILL,HILL,resmlp,resmlp_shallow,-0.1,333,339,-0.8666666666666667,0.6833333333333333

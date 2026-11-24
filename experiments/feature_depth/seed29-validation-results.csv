@@ -1,0 +1,5 @@
+﻿source,variant,correct,images,accuracy_pct,full_params
+WOW,hierarchy,1693,2000,84.65,82461
+WOW,baseline,1665,2000,83.25,16828
+HILL,hierarchy,1575,2000,78.75,82461
+HILL,baseline,1540,2000,77.0,16828

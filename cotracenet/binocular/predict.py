@@ -41,8 +41,12 @@ class PolicyDetector:
 
     @torch.inference_mode()
     def predict(self, path):
+        return self.predict_features(self.inference.joint_features(Path(path)))
+
+    @torch.inference_mode()
+    def predict_features(self, features):
+        """Score an already extracted 34,398-dimensional single-image descriptor."""
         b = self.backbone
-        features = self.inference.joint_features(Path(path))
         x = torch.from_numpy(np.ascontiguousarray(features, dtype=np.float64)).reshape(
             1, -1
         )

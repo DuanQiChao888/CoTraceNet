@@ -1,0 +1,11 @@
+﻿source,variant,correct,images,accuracy_pct,full_params
+WOW,hierarchy,1692,2000,84.6,82461
+WOW,resmlp_shallow,1688,2000,84.4,83135
+WOW,resmlp,1684,2000,84.2,83857
+WOW,spatial,1669,2000,83.45,78525
+WOW,baseline,1665,2000,83.25,16828
+HILL,hierarchy,1573,2000,78.65,82461
+HILL,resmlp_shallow,1554,2000,77.7,83135
+HILL,resmlp,1552,2000,77.6,83857
+HILL,baseline,1540,2000,77.0,16828
+HILL,spatial,1540,2000,77.0,78525
