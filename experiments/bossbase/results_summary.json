@@ -1,0 +1,191 @@
+{
+  "protocol": {
+    "dataset": "BOSSbase 1.01",
+    "input_image_size": [
+      256,
+      256
+    ],
+    "payload_bpp": 0.4,
+    "train_pairs": 6000,
+    "validation_pairs": 1000,
+    "test_pairs": 3000,
+    "test_images": 6000
+  },
+  "metric_units": {
+    "accuracy": "percent",
+    "detection_rate": "percent",
+    "false_positive_rate": "percent",
+    "auc": "fraction",
+    "difference": "percentage points"
+  },
+  "same_embedding": {
+    "WOW": [
+      {
+        "model": "ShuffleBANet (paper, Table X)",
+        "validation_auc": null,
+        "test_accuracy_pct": 91.62,
+        "test_auc": 0.9813
+      },
+      {
+        "model": "ShuffleBANet (reproduction)",
+        "epoch": 30,
+        "validation_auc": 0.9569,
+        "test_accuracy_pct": 89.52,
+        "test_auc": 0.9719
+      },
+      {
+        "model": "CoTraceNet-Lite",
+        "optimizer_updates": 100,
+        "validation_auc": 0.9406,
+        "test_accuracy_pct": 87.08,
+        "test_auc": 0.9552
+      }
+    ],
+    "HILL": [
+      {
+        "model": "ShuffleBANet (reproduction)",
+        "source_validation_selection": "every epoch",
+        "epoch": 13,
+        "test_accuracy_pct": 76.62,
+        "test_auc": 0.8804
+      },
+      {
+        "model": "ShuffleBANet (reproduction)",
+        "source_validation_selection": "epochs 20, 50, 100, 200",
+        "epoch": 20,
+        "test_accuracy_pct": 75.13,
+        "test_auc": 0.8697
+      },
+      {
+        "model": "CoTraceNet-Lite",
+        "optimizer_updates": 100,
+        "test_accuracy_pct": 76.82,
+        "test_auc": 0.8728
+      }
+    ]
+  },
+  "training_ablation": {
+    "inference_parameters": 16385,
+    "rows": [
+      {
+        "configuration": "Fisher selector and closed-form readout",
+        "wow": {
+          "accuracy_pct": 78.42,
+          "correct": 4705
+        },
+        "hill": {
+          "accuracy_pct": 74.02,
+          "correct": 4441
+        }
+      },
+      {
+        "configuration": "Fisher coordinates and iterative logistic readout",
+        "wow": {
+          "accuracy_pct": 82.92,
+          "correct": 4975
+        },
+        "hill": {
+          "accuracy_pct": 76.7,
+          "correct": 4602
+        }
+      },
+      {
+        "configuration": "CoTraceNet-Lite",
+        "wow": {
+          "accuracy_pct": 87.08,
+          "correct": 5225
+        },
+        "hill": {
+          "accuracy_pct": 76.82,
+          "correct": 4609
+        }
+      }
+    ]
+  },
+  "cross_embedding": {
+    "protocol": "Source-trained models evaluated directly on the other embedding algorithm with frozen weights and a fixed zero threshold.",
+    "rows": [
+      {
+        "train": "WOW",
+        "test": "HILL",
+        "cnn_epoch": 30,
+        "cnn_checkpoint_selection": "every epoch",
+        "cnn": {
+          "correct": 3760,
+          "accuracy_pct": 62.67,
+          "auc": 0.7582
+        },
+        "lite": {
+          "correct": 4241,
+          "accuracy_pct": 70.68,
+          "auc": 0.817
+        },
+        "lite_minus_cnn_correct": 481
+      },
+      {
+        "train": "HILL",
+        "test": "WOW",
+        "cnn_epoch": 13,
+        "cnn_checkpoint_selection": "every epoch",
+        "cnn": {
+          "correct": 4542,
+          "accuracy_pct": 75.7,
+          "auc": 0.8727
+        },
+        "lite": {
+          "correct": 4680,
+          "accuracy_pct": 78.0,
+          "auc": 0.8807
+        },
+        "lite_minus_cnn_correct": 138
+      },
+      {
+        "train": "HILL",
+        "test": "WOW",
+        "cnn_epoch": 20,
+        "cnn_checkpoint_selection": "four preset epochs",
+        "cnn": {
+          "correct": 4427,
+          "accuracy_pct": 73.78,
+          "auc": 0.854
+        },
+        "lite": {
+          "correct": 4680,
+          "accuracy_pct": 78.0,
+          "auc": 0.8807
+        },
+        "lite_minus_cnn_correct": 253
+      }
+    ]
+  },
+  "low_false_positive_wow": {
+    "validation_cover_images": 1000,
+    "validation_target_false_positive_pct": 5,
+    "test_cover_images": 3000,
+    "test_stego_images": 3000,
+    "rows": [
+      {
+        "model": "ShuffleBANet",
+        "false_positive": 137,
+        "false_positive_rate_pct": 4.57,
+        "true_positive": 2222,
+        "true_positive_rate_pct": 74.07
+      },
+      {
+        "model": "CoTraceNet-Lite",
+        "false_positive": 132,
+        "false_positive_rate_pct": 4.4,
+        "true_positive": 2084,
+        "true_positive_rate_pct": 69.47
+      }
+    ]
+  },
+  "full_minus_closed_correct": {
+    "WOW": 520,
+    "HILL": 168
+  },
+  "archive": {
+    "version": "f8e47d6",
+    "url": "https://github.com/DuanQiChao888/CoTraceNet/tree/f8e47d6a81c31a808d26fa0443e293d323054e15/experiments/bossbase"
+  }
+}
