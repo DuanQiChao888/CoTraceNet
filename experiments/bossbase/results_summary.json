@@ -37,8 +37,8 @@
         "model": "CoTraceNet-Lite",
         "optimizer_updates": 100,
         "validation_auc": 0.9406,
-        "test_accuracy_pct": 87.08,
-        "test_auc": 0.9552
+        "test_accuracy_pct": 84.08,
+        "test_auc": 0.9252
       }
     ],
     "HILL": [
@@ -92,8 +92,8 @@
       {
         "configuration": "CoTraceNet-Lite",
         "wow": {
-          "accuracy_pct": 87.08,
-          "correct": 5225
+          "accuracy_pct": 84.08,
+          "correct": 5045
         },
         "hill": {
           "accuracy_pct": 76.82,
@@ -181,7 +181,7 @@
     ]
   },
   "full_minus_closed_correct": {
-    "WOW": 520,
+    "WOW": 340,
     "HILL": 168
   },
   "archive": {

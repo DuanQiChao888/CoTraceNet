@@ -1,0 +1,64 @@
+comparison,model,new_branch_seed,train_embedding,test_embedding,inference_parameters,accuracy_percent,test_auc,correct,test_images
+literature,ShuffleBANet (Table X),,WOW,WOW,,91.62,0.9813,,6000
+main,ShuffleBANet (reproduction; per-epoch selection),,WOW,WOW,651876,89.52,0.9719,5371,6000
+main,ShuffleBANet (reproduction; per-epoch selection),,HILL,HILL,651876,76.62,0.8804,4597,6000
+main,ShuffleBANet (reproduction; per-epoch selection),,WOW,HILL,651876,62.67,0.7582,3760,6000
+main,ShuffleBANet (reproduction; per-epoch selection),,HILL,WOW,651876,75.70,0.8727,4542,6000
+main,CoTraceNet-Lite (base),,WOW,WOW,16385,84.08,0.9252,5045,6000
+main,CoTraceNet-Lite (base),,HILL,HILL,16385,76.82,0.8728,4609,6000
+main,CoTraceNet-Lite (base),,WOW,HILL,16385,70.68,0.8170,4241,6000
+main,CoTraceNet-Lite (base),,HILL,WOW,16385,78.00,0.8807,4680,6000
+main,CoTraceNet-Lite (frozen dual-view reward),,WOW,WOW,16828,84.08,,5045,6000
+main,CoTraceNet-Lite (frozen dual-view reward),,HILL,HILL,16828,77.23,,4634,6000
+main,CoTraceNet-Lite (frozen dual-view reward),,WOW,HILL,16828,70.25,,4215,6000
+main,CoTraceNet-Lite (frozen dual-view reward),,HILL,WOW,16828,78.00,,4680,6000
+main,CoTraceNet-Hier,73,WOW,WOW,82461,88.83,,5330,6000
+main,CoTraceNet-Hier,73,HILL,HILL,82461,83.38,,5003,6000
+main,CoTraceNet-Hier,73,WOW,HILL,82461,71.30,,4278,6000
+main,CoTraceNet-Hier,73,HILL,WOW,82461,79.07,,4744,6000
+main,CoTraceNet-Hier,29,WOW,WOW,82461,88.85,,5331,6000
+main,CoTraceNet-Hier,29,HILL,HILL,82461,83.18,,4991,6000
+main,CoTraceNet-Hier,29,WOW,HILL,82461,71.02,,4261,6000
+main,CoTraceNet-Hier,29,HILL,WOW,82461,78.98,,4739,6000
+architecture,Shallow MLP with anchor,73,WOW,WOW,83135,84.07,,5044,6000
+architecture,Shallow MLP with anchor,73,HILL,HILL,83135,77.67,,4660,6000
+architecture,Shallow MLP with anchor,73,WOW,HILL,83135,71.65,,4299,6000
+architecture,Shallow MLP with anchor,73,HILL,WOW,83135,78.90,,4734,6000
+architecture,Residual MLP with anchor,73,WOW,WOW,83857,87.17,,5230,6000
+architecture,Residual MLP with anchor,73,HILL,HILL,83857,77.57,,4654,6000
+architecture,Residual MLP with anchor,73,WOW,HILL,83857,70.88,,4253,6000
+architecture,Residual MLP with anchor,73,HILL,WOW,83857,78.48,,4709,6000
+architecture,Spatial grid CNN with anchor,73,WOW,WOW,78525,85.15,,5109,6000
+architecture,Spatial grid CNN with anchor,73,HILL,HILL,78525,77.23,,4634,6000
+architecture,Spatial grid CNN with anchor,73,WOW,HILL,78525,69.92,,4195,6000
+architecture,Spatial grid CNN with anchor,73,HILL,WOW,78525,78.00,,4680,6000
+lite_training,Fisher selection and closed-form readout,,WOW,WOW,16385,78.42,,4705,6000
+lite_training,Fisher selection and closed-form readout,,HILL,HILL,16385,74.02,,4441,6000
+lite_training,Fisher selection and iterative readout,,WOW,WOW,16385,82.92,,4975,6000
+lite_training,Fisher selection and iterative readout,,HILL,HILL,16385,76.70,,4602,6000
+reward_ablation,Lite starting weights (reward ablation),,WOW,WOW,16385,83.08,,4985,6000
+reward_ablation,Lite starting weights (reward ablation),,HILL,HILL,16385,76.82,,4609,6000
+reward_ablation,Lite starting weights (reward ablation),,WOW,HILL,16385,70.68,,4241,6000
+reward_ablation,Lite starting weights (reward ablation),,HILL,WOW,16385,78.00,,4680,6000
+reward_ablation,Global attention,,WOW,WOW,,83.17,,4990,6000
+reward_ablation,Global attention,,HILL,HILL,,76.92,,4615,6000
+reward_ablation,Global attention,,WOW,HILL,,70.23,,4214,6000
+reward_ablation,Global attention,,HILL,WOW,,78.03,,4682,6000
+reward_ablation,Global and paired attention,,WOW,WOW,,83.15,,4989,6000
+reward_ablation,Global and paired attention,,HILL,HILL,,77.10,,4626,6000
+reward_ablation,Global and paired attention,,WOW,HILL,,70.25,,4215,6000
+reward_ablation,Global and paired attention,,HILL,WOW,,78.12,,4687,6000
+hier_ablation,Full-input linear model with anchor,73,WOW,WOW,,83.17,,4990,6000
+hier_ablation,Full-input linear model with anchor,73,HILL,HILL,,77.23,,4634,6000
+hier_ablation,Hierarchical branch alone,73,WOW,WOW,65633,84.40,,5064,6000
+hier_ablation,Hierarchical branch alone,73,HILL,HILL,65633,78.32,,4699,6000
+local_review,Fixed patch,,WOW,WOW,,83.17,,4990,6000
+local_review,Fixed patch,,HILL,HILL,,77.15,,4629,6000
+local_review,Fixed patch,,WOW,HILL,,70.28,,4217,6000
+local_review,Fixed patch,,HILL,WOW,,78.00,,4680,6000
+local_review,Disagreement-selected patch,,WOW,WOW,,83.13,,4988,6000
+local_review,Disagreement-selected patch,,HILL,HILL,,77.07,,4624,6000
+local_review,Disagreement-selected patch,,WOW,HILL,,70.02,,4201,6000
+local_review,Disagreement-selected patch,,HILL,WOW,,77.78,,4667,6000
+cnn_selection,ShuffleBANet (HILL; four preset epochs; epoch 20),,HILL,HILL,651876,75.13,0.8697,4508,6000
+cnn_selection,ShuffleBANet (HILL; four preset epochs; epoch 20),,HILL,WOW,651876,73.78,0.8540,4427,6000
